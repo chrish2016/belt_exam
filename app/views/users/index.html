@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+    <title></title>
+  </head>
+  <body>
+    <div id="wrapper">
+    <header>
+      <form action="/users" method="get"><input type="submit" value="home"></form>
+      <form action="/logout" method="get"><input type="submit" value="logout"></form>
+      <h1>Welcome {{session['user']['alias']}}!</h1>
+      <nav>
+
+      </nav>
+    </header>
+    <section>
+      <article>
+      </article>
+      <aside>
+          <h2>Members</h2>
+          {% for user in users %}
+          <h3><a href="/users/{{user['id']}}">{{user['alias']}}</a></h3>
+              {% if session['user']['admin'] == 1 %}
+              <form action="/users/{{ user['id'] }}/delete" method="POST">
+                  <input type="submit" value="delete">
+              </form>
+              <hr>
+              {% endif %}
+          {% endfor %}
+      </aside>
+    </section>
+    <footer>
+    </footer>
+  </div>
+  </body>
+</html>
